@@ -1,0 +1,110 @@
+.reel-mockup {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.reel-container {
+  position: relative;
+  aspect-ratio: 9/16;
+  max-height: 380px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.reel-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+}
+
+.reel-right-actions {
+  position: absolute;
+  right: 10px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.reel-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.reel-audio-disc {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #fff;
+}
+
+.reel-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 50px;
+  padding: 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+
+.reel-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.reel-username {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.reel-follow-btn {
+  background: none;
+  border: 1.5px solid #fff;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.reel-description {
+  font-size: 13px;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.reel-audio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+}
+
+.mockup-label-inner {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #bbb;
+  text-align: center;
+  padding: 10px 0 6px;
+}
