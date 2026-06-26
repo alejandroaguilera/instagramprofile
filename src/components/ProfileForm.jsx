@@ -1,22 +1,44 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import PhotoCropModal from './PhotoCropModal'
 import './ProfileForm.css'
 
 export default function ProfileForm({ profile, onChange }) {
   const fileInputRef = useRef(null)
+  const originalPhotoRef = useRef(null)
+  const [cropSrc, setCropSrc] = useState(null)
+
+  const openCropper = (file) => {
+    const url = URL.createObjectURL(file)
+    originalPhotoRef.current = url
+    setCropSrc(url)
+  }
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
-    const url = URL.createObjectURL(file)
-    onChange('photoUrl', url)
+    openCropper(file)
+    e.target.value = ''
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
     if (!file || !file.type.startsWith('image/')) return
-    const url = URL.createObjectURL(file)
-    onChange('photoUrl', url)
+    openCropper(file)
+  }
+
+  const handleReadjust = (e) => {
+    e.stopPropagation()
+    if (originalPhotoRef.current) setCropSrc(originalPhotoRef.current)
+  }
+
+  const handleCropConfirm = (croppedUrl) => {
+    onChange('photoUrl', croppedUrl)
+    setCropSrc(null)
+  }
+
+  const handleCropCancel = () => {
+    setCropSrc(null)
   }
 
   const formatNumber = (val) => {
@@ -44,6 +66,11 @@ export default function ProfileForm({ profile, onChange }) {
               <div className="photo-overlay">
                 <span>Cambiar foto</span>
               </div>
+              <button className="photo-adjust-btn" onClick={handleReadjust} title="Ajustar zoom y encuadre">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                </svg>
+              </button>
             </div>
           ) : (
             <div className="photo-placeholder">
@@ -171,6 +198,14 @@ export default function ProfileForm({ profile, onChange }) {
         </svg>
         Tus datos no se envían a ningún servidor. Todo se procesa localmente en tu navegador.
       </div>
+
+      {cropSrc && (
+        <PhotoCropModal
+          imageSrc={cropSrc}
+          onConfirm={handleCropConfirm}
+          onCancel={handleCropCancel}
+        />
+      )}
     </div>
   )
 }

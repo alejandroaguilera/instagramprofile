@@ -169,6 +169,27 @@
   opacity: 1;
 }
 
+.photo-adjust-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.photo-adjust-btn:hover {
+  background: rgba(0,0,0,0.75);
+}
+
 /* Toggle */
 .toggle-label {
   display: flex;
