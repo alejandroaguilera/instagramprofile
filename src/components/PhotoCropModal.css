@@ -1,0 +1,103 @@
+.crop-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.crop-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.crop-modal-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.crop-modal-subtitle {
+  font-size: 12.5px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.crop-viewport {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: #1a1a1a;
+  cursor: grab;
+  touch-action: none;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 5px #eee;
+}
+
+.crop-viewport:active {
+  cursor: grabbing;
+}
+
+.crop-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.crop-zoom-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 0 4px;
+}
+
+.crop-zoom-slider {
+  flex: 1;
+  accent-color: #0095f6;
+  cursor: pointer;
+}
+
+.crop-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.crop-btn-cancel, .crop-btn-confirm {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+}
+
+.crop-btn-cancel {
+  background: #efefef;
+  color: #1a1a1a;
+}
+
+.crop-btn-confirm {
+  background: #0095f6;
+  color: #fff;
+}
