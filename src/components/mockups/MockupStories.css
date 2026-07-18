@@ -43,7 +43,7 @@
 /* Story viewer */
 .story-viewer {
   position: relative;
-  margin: 0 16px 16px;
+  margin: 0 auto 16px;
   border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 9/16;

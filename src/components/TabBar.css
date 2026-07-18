@@ -1,0 +1,83 @@
+.tab-bar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -1px 0 var(--hairline);
+    padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+  }
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: var(--ink-3);
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab-item.active {
+  color: var(--ink);
+}
+
+.tab-icon {
+  display: flex;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.tab-item:active .tab-icon {
+  transform: scale(0.9);
+}
+
+.tab-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.tab-item.active .tab-label {
+  font-weight: 700;
+}
+
+/* Botón central "Editar", estilo botón + de Instagram */
+.tab-edit .tab-icon {
+  width: 40px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+}
+
+.tab-edit .tab-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tab-edit.active .tab-icon {
+  background: var(--accent-hover);
+}
+
+.tab-edit.active {
+  color: var(--accent);
+}

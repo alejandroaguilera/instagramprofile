@@ -7,16 +7,28 @@
   justify-content: center;
   z-index: 1000;
   padding: 20px;
+  animation: crop-overlay-in var(--dur) var(--ease-out);
+}
+
+@keyframes crop-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .crop-modal {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
   width: 100%;
   max-width: 360px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow: var(--shadow-raised);
+  font-family: inherit;
+  animation: crop-modal-in var(--dur) var(--ease-out);
+}
+
+@keyframes crop-modal-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: none; }
 }
 
 .crop-modal-title {
@@ -71,7 +83,7 @@
 
 .crop-zoom-slider {
   flex: 1;
-  accent-color: #0095f6;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
@@ -84,20 +96,33 @@
 .crop-btn-cancel, .crop-btn-confirm {
   flex: 1;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
   border: none;
+  transition: background var(--dur-fast), transform var(--dur-fast);
+}
+
+.crop-btn-cancel:active, .crop-btn-confirm:active {
+  transform: scale(0.98);
 }
 
 .crop-btn-cancel {
   background: #efefef;
-  color: #1a1a1a;
+  color: var(--ink);
+}
+
+.crop-btn-cancel:hover {
+  background: #e4e4e4;
 }
 
 .crop-btn-confirm {
-  background: #0095f6;
+  background: var(--accent);
   color: #fff;
+}
+
+.crop-btn-confirm:hover {
+  background: var(--accent-hover);
 }

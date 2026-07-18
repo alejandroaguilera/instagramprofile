@@ -1,6 +1,9 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import ProfileForm from './components/ProfileForm'
-import MockupGrid from './components/MockupGrid'
+import SectionView from './components/SectionView'
+import SideNav from './components/SideNav'
+import TabBar from './components/TabBar'
+import useMediaQuery from './useMediaQuery'
 import './App.css'
 
 const DEFAULT_PROFILE = {
@@ -11,15 +14,23 @@ const DEFAULT_PROFILE = {
   following: '312',
   posts: '47',
   photoUrl: null,
+  originalPhotoUrl: null,
   verified: false,
 }
 
 export default function App() {
   const [profile, setProfile] = useState(DEFAULT_PROFILE)
+  const [activeSection, setActiveSection] = useState('perfil')
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   const handleChange = useCallback((key, value) => {
     setProfile(prev => ({ ...prev, [key]: value }))
   }, [])
+
+  // En desktop el formulario siempre está visible: el tab "editar" solo existe en móvil
+  useEffect(() => {
+    if (isDesktop && activeSection === 'editar') setActiveSection('perfil')
+  }, [isDesktop, activeSection])
 
   return (
     <div className="app">
@@ -39,14 +50,23 @@ export default function App() {
 
       <main className="app-main">
         <div className="layout">
+          <SideNav activeSection={activeSection} onSelect={setActiveSection} />
           <aside className="sidebar">
             <ProfileForm profile={profile} onChange={handleChange} />
           </aside>
           <div className="content">
-            <MockupGrid profile={profile} />
+            {activeSection === 'editar' ? (
+              <div className="section-panel mobile-form" key="editar">
+                <ProfileForm profile={profile} onChange={handleChange} />
+              </div>
+            ) : (
+              <SectionView section={activeSection} profile={profile} />
+            )}
           </div>
         </div>
       </main>
+
+      <TabBar activeSection={activeSection} onSelect={setActiveSection} />
     </div>
   )
 }

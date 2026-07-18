@@ -4,12 +4,11 @@ import './ProfileForm.css'
 
 export default function ProfileForm({ profile, onChange }) {
   const fileInputRef = useRef(null)
-  const originalPhotoRef = useRef(null)
   const [cropSrc, setCropSrc] = useState(null)
 
   const openCropper = (file) => {
     const url = URL.createObjectURL(file)
-    originalPhotoRef.current = url
+    onChange('originalPhotoUrl', url)
     setCropSrc(url)
   }
 
@@ -27,9 +26,8 @@ export default function ProfileForm({ profile, onChange }) {
     openCropper(file)
   }
 
-  const handleReadjust = (e) => {
-    e.stopPropagation()
-    if (originalPhotoRef.current) setCropSrc(originalPhotoRef.current)
+  const handleReadjust = () => {
+    if (profile.originalPhotoUrl) setCropSrc(profile.originalPhotoUrl)
   }
 
   const handleCropConfirm = (croppedUrl) => {
@@ -55,25 +53,30 @@ export default function ProfileForm({ profile, onChange }) {
       <div className="form-section">
         <label className="form-label">Foto de perfil</label>
         <div
-          className="photo-upload"
-          onClick={() => fileInputRef.current.click()}
+          className={profile.photoUrl ? 'photo-upload has-photo' : 'photo-upload'}
           onDrop={handleDrop}
           onDragOver={e => e.preventDefault()}
         >
           {profile.photoUrl ? (
-            <div className="photo-preview-wrap">
-              <img src={profile.photoUrl} alt="Preview" className="photo-preview-img" />
-              <div className="photo-overlay">
-                <span>Cambiar foto</span>
-              </div>
-              <button className="photo-adjust-btn" onClick={handleReadjust} title="Ajustar zoom y encuadre">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-                </svg>
+            <>
+              <button
+                type="button"
+                className="photo-preview-wrap"
+                onClick={() => fileInputRef.current.click()}
+                title="Cambiar foto"
+              >
+                <img src={profile.photoUrl} alt="Foto de perfil" className="photo-preview-img" />
+                <span className="photo-overlay">Cambiar</span>
               </button>
-            </div>
+              <div className="photo-actions">
+                <button type="button" className="photo-action" onClick={handleReadjust}>
+                  Reajustar encuadre
+                </button>
+                <span className="photo-hint">Haz clic en la foto para cambiarla</span>
+              </div>
+            </>
           ) : (
-            <div className="photo-placeholder">
+            <div className="photo-placeholder" onClick={() => fileInputRef.current.click()}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>

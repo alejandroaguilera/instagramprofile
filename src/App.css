@@ -5,8 +5,8 @@
 }
 
 .app-header {
-  background: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  background: var(--surface);
+  box-shadow: 0 1px 0 var(--hairline);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -15,10 +15,10 @@
 .header-inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 14px var(--sp-5);
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--sp-5);
 }
 
 .header-logo {
@@ -27,10 +27,11 @@
   gap: 10px;
   font-weight: 700;
   font-size: 17px;
-  color: #1a1a1a;
+  color: var(--ink);
   flex-shrink: 0;
 }
 
+/* El rosa de Instagram vive solo aquí, como marca */
 .header-logo svg {
   color: #e1306c;
 }
@@ -43,15 +44,15 @@
 
 .app-main {
   flex: 1;
-  padding: 24px;
+  padding: var(--sp-5);
 }
 
 .layout {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 24px;
+  grid-template-columns: auto 340px 1fr;
+  gap: var(--sp-5);
   align-items: start;
 }
 
@@ -64,11 +65,33 @@
   min-width: 0;
 }
 
-@media (max-width: 900px) {
+.mobile-form {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1199px) {
+  .layout {
+    grid-template-columns: auto 300px 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-subtitle {
+    display: none;
+  }
+
+  .app-main {
+    padding: var(--sp-4);
+    /* deja sitio para la tab bar fija */
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
   .layout {
     grid-template-columns: 1fr;
   }
+
   .sidebar {
-    position: static;
+    display: none;
   }
 }

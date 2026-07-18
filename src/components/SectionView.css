@@ -1,0 +1,67 @@
+.section-panel {
+  animation: section-in var(--dur) var(--ease-out);
+}
+
+@keyframes section-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.section-grid {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.section-grid.single {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.section-grid.single.wide {
+  max-width: 520px;
+}
+
+.section-grid.two-col {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 860px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* El reel es intrínsecamente estrecho (9/16): que no se estire a toda la columna */
+.section-grid .reel-mockup {
+  width: 100%;
+  max-width: 280px;
+  justify-self: center;
+}
+
+@media (max-width: 767px) {
+  .section-grid.two-col {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+}
+
+/* Shared mockup shell (usada por los 8 mockups) */
+.mockup-card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.mockup-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #aaa;
+  text-align: center;
+  padding: 8px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
