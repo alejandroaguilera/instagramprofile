@@ -103,7 +103,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #bbb;
+  color: var(--ink-4);
   text-align: center;
   padding: 10px 0 6px;
 }

@@ -38,8 +38,34 @@
 
 .header-subtitle {
   font-size: 13px;
-  color: #666;
+  color: var(--ink-2);
   line-height: 1.4;
+}
+
+.theme-toggle {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+  background: var(--hover);
+  color: var(--ink);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
 }
 
 .app-main {

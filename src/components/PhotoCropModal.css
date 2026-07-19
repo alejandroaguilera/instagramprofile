@@ -34,14 +34,14 @@
 .crop-modal-title {
   font-size: 17px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--ink);
   margin-bottom: 4px;
   text-align: center;
 }
 
 .crop-modal-subtitle {
   font-size: 12.5px;
-  color: #888;
+  color: var(--ink-3);
   text-align: center;
   margin-bottom: 18px;
   line-height: 1.4;
@@ -57,7 +57,7 @@
   background: #1a1a1a;
   cursor: grab;
   touch-action: none;
-  box-shadow: 0 0 0 4px #fff, 0 0 0 5px #eee;
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line);
 }
 
 .crop-viewport:active {
@@ -110,12 +110,12 @@
 }
 
 .crop-btn-cancel {
-  background: #efefef;
+  background: var(--surface-3);
   color: var(--ink);
 }
 
 .crop-btn-cancel:hover {
-  background: #e4e4e4;
+  background: var(--surface-3-hover);
 }
 
 .crop-btn-confirm {

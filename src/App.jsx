@@ -22,8 +22,14 @@ const DEFAULT_PROFILE = {
 // Orden visual de los tabs (el del TabBar móvil) para decidir la dirección del slide
 const NAV_ORDER = ['perfil', 'historias', 'editar', 'feed', 'interacciones']
 
+// El script inline de index.html ya resolvió el tema antes del primer paint:
+// el estado inicial se lee del atributo, no se recalcula
+const getInitialTheme = () =>
+  document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
+
 export default function App() {
   const [profile, setProfile] = useState(DEFAULT_PROFILE)
+  const [theme, setTheme] = useState(getInitialTheme)
   const [activeSection, setActiveSection] = useState('perfil')
   const [direction, setDirection] = useState('fwd')
   const [cropSrc, setCropSrc] = useState(null)
@@ -44,6 +50,19 @@ export default function App() {
   useEffect(() => {
     if (isDesktop && activeSection === 'editar') setActiveSection('perfil')
   }, [isDesktop, activeSection])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+  }, [theme])
+
+  // Solo se persiste al togglear: mientras no haya elección explícita, se sigue al sistema
+  const toggleTheme = () => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark'
+      try { localStorage.setItem('theme', next) } catch { /* modo privado */ }
+      return next
+    })
+  }
 
   // Flujo de subida/crop compartido: formulario (ambas instancias) y avatar del mockup de perfil
   const openFilePicker = () => fileInputRef.current?.click()
@@ -92,6 +111,24 @@ export default function App() {
             <span>Instagram Photo Preview</span>
           </div>
           <p className="header-subtitle">Previsualiza cómo se ve tu foto de perfil en cada contexto de Instagram</p>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+            title={theme === 'dark' ? 'Tema claro' : 'Tema oscuro'}
+          >
+            {theme === 'dark' ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
         </div>
       </header>
 

@@ -13,7 +13,7 @@
 }
 
 .avatar-wrap.story-viewed {
-  background: #ccc;
+  background: var(--line);
   padding: 2.5px;
 }
 
@@ -42,7 +42,7 @@ button.avatar-wrap {
   flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
-  background: #efefef;
+  background: var(--surface-3);
 }
 
 .avatar-inner {
@@ -50,8 +50,8 @@ button.avatar-wrap {
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #fff;
-  background: #efefef;
+  border: 2px solid var(--surface);
+  background: var(--surface-3);
 }
 
 .avatar-wrap:not(.story-active):not(.story-viewed) .avatar-inner {

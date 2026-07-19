@@ -7,7 +7,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #aaa;
+  color: var(--ink-4);
   padding: 12px 16px 6px;
 }
 
@@ -32,7 +32,7 @@
 
 .story-name {
   font-size: 11px;
-  color: #1a1a1a;
+  color: var(--ink);
   max-width: 64px;
   text-align: center;
   overflow: hidden;

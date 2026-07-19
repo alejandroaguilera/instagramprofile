@@ -7,14 +7,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid var(--hairline-strong);
 }
 
 .ig-back, .ig-topbar-more {
   background: none;
   border: none;
   cursor: pointer;
-  color: #1a1a1a;
+  color: var(--ink);
   padding: 2px;
   display: flex;
 }
@@ -59,12 +59,12 @@
 .profile-stat strong {
   font-size: 16px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--ink);
 }
 
 .profile-stat span {
   font-size: 12px;
-  color: #444;
+  color: var(--ink-2);
 }
 
 /* Bio */
@@ -75,7 +75,7 @@
 .profile-fullname {
   font-weight: 700;
   font-size: 13.5px;
-  color: #1a1a1a;
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -84,7 +84,7 @@
 
 .profile-bio-line {
   font-size: 13px;
-  color: #1a1a1a;
+  color: var(--ink);
   line-height: 1.45;
 }
 
@@ -99,30 +99,30 @@
   flex: 1;
   padding: 7px 10px;
   border-radius: 8px;
-  border: 1.5px solid #ddd;
+  border: 1.5px solid var(--line);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  background: #efefef;
-  color: #1a1a1a;
+  background: var(--surface-3);
+  color: var(--ink);
 }
 
 .ig-btn-primary {
-  background: #efefef;
+  background: var(--surface-3);
 }
 
 .ig-btn-icon {
   width: 36px;
   flex-shrink: 0;
   border-radius: 8px;
-  border: 1.5px solid #ddd;
-  background: #efefef;
+  border: 1.5px solid var(--line);
+  background: var(--surface-3);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #1a1a1a;
+  color: var(--ink);
 }
 
 /* Highlights */
@@ -146,7 +146,7 @@
 
 .highlight-item span {
   font-size: 11px;
-  color: #1a1a1a;
+  color: var(--ink);
   max-width: 62px;
   text-align: center;
   overflow: hidden;
@@ -158,29 +158,29 @@
   width: 62px;
   height: 62px;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--surface);
 }
 
 .highlight-add {
-  background: #fafafa;
+  background: var(--surface-2);
 }
 
 .highlight-inner {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #efefef, #ddd);
+  background: linear-gradient(135deg, var(--surface-3), var(--line));
 }
 
 /* Tabs */
 .profile-tabs {
   display: flex;
-  border-top: 1px solid #efefef;
-  border-bottom: 1px solid #efefef;
+  border-top: 1px solid var(--hairline-strong);
+  border-bottom: 1px solid var(--hairline-strong);
 }
 
 .profile-tab {
@@ -189,14 +189,14 @@
   align-items: center;
   justify-content: center;
   padding: 12px;
-  color: #999;
+  color: var(--ink-3);
   cursor: pointer;
   border-bottom: 2px solid transparent;
 }
 
 .profile-tab.active {
-  color: #1a1a1a;
-  border-bottom-color: #1a1a1a;
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
 /* Grid */

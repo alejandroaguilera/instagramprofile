@@ -7,7 +7,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #bbb;
+  color: var(--ink-4);
   text-align: center;
   padding: 10px 0 6px;
 }
@@ -34,7 +34,7 @@
 .comment-post-username {
   font-size: 13px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -42,13 +42,13 @@
 
 .comment-post-caption {
   font-size: 12.5px;
-  color: #444;
+  color: var(--ink-2);
   padding-left: 34px;
 }
 
 .comment-divider {
   height: 1px;
-  background: #efefef;
+  background: var(--surface-3);
   margin: 0 14px;
 }
 
@@ -75,7 +75,7 @@
 .comment-username {
   font-size: 13px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   gap: 3px;
@@ -83,7 +83,7 @@
 
 .comment-text {
   font-size: 13px;
-  color: #1a1a1a;
+  color: var(--ink);
   line-height: 1.4;
 }
 
@@ -92,7 +92,7 @@
   gap: 12px;
   margin-top: 4px;
   font-size: 11.5px;
-  color: #888;
+  color: var(--ink-3);
   font-weight: 500;
 }
 
@@ -101,12 +101,12 @@
   align-items: center;
   gap: 10px;
   padding: 10px 14px 14px;
-  border-top: 1px solid #efefef;
+  border-top: 1px solid var(--hairline-strong);
 }
 
 .comment-input-box {
   flex: 1;
   font-size: 13.5px;
-  color: #aaa;
+  color: var(--ink-4);
   cursor: text;
 }

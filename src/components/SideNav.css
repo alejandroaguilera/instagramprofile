@@ -25,7 +25,7 @@
 }
 
 .side-nav-item:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--hover);
 }
 
 .side-nav-item:active {

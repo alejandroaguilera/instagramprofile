@@ -1,16 +1,26 @@
 :root {
+  color-scheme: light;
+
   /* Acento único (el rosa #e1306c queda solo como marca en el logo) */
   --accent: #0095f6;
   --accent-hover: #1877f2;
   --accent-soft: rgba(0, 149, 246, 0.1);
 
-  /* Neutros */
+  /* Neutros: tinta (4 niveles de énfasis) y superficies */
   --ink: #1a1a1a;
   --ink-2: #555;
   --ink-3: #8e8e8e;
+  --ink-4: #aaa;
   --surface: #fff;
+  --surface-2: #fafafa;
+  --surface-3: #efefef;
+  --surface-3-hover: #e4e4e4;
   --bg: #f0f2f5;
   --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-strong: #efefef;
+  --line: #ddd;
+  --hover: rgba(0, 0, 0, 0.04);
+  --nav-glass: rgba(255, 255, 255, 0.92);
 
   /* Sombras semi-transparentes: el ring de 1px sustituye a los bordes duros */
   --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 28px rgba(0, 0, 0, 0.07);
@@ -32,6 +42,32 @@
   --dur: 200ms;
   --dur-slow: 320ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tema oscuro: mismos tokens, valores invertidos. Lo activa el atributo
+   data-theme en <html> (script inline en index.html + toggle del header). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --accent-soft: rgba(0, 149, 246, 0.16);
+
+  --ink: #f2f3f5;
+  --ink-2: #b0b3b8;
+  --ink-3: #a8a8a8;
+  --ink-4: #6e7075;
+  --surface: #1e1f23;
+  --surface-2: #26272c;
+  --surface-3: #2f3036;
+  --surface-3-hover: #3a3b42;
+  --bg: #121316;
+  --hairline: rgba(255, 255, 255, 0.1);
+  --hairline-strong: #2e2f34;
+  --line: #3e4046;
+  --hover: rgba(255, 255, 255, 0.06);
+  --nav-glass: rgba(30, 31, 35, 0.92);
+
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.07), 0 2px 8px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.35);
+  --shadow-raised: 0 4px 12px rgba(0, 0, 0, 0.4), 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
 *, *::before, *::after {
@@ -63,7 +99,7 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: var(--line);
   border-radius: 3px;
 }
 
