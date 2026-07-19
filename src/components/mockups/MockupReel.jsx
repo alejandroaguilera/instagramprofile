@@ -36,7 +36,7 @@ export default function MockupReel({ profile }) {
           </div>
           {/* Audio disc */}
           <div className="reel-audio-disc">
-            <Avatar photoUrl={profile.photoUrl} username={profile.username} size={36} />
+            <Avatar plain photoUrl={profile.photoUrl} username={profile.username} size={30} />
           </div>
         </div>
 

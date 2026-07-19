@@ -1,11 +1,27 @@
-.section-panel {
-  animation: section-in var(--dur) var(--ease-out);
+/* Slide direccional entre tabs, como el swipe de la app de Instagram */
+.section-panel.from-fwd {
+  animation: section-in-fwd var(--dur-slow) var(--ease-out);
 }
 
-@keyframes section-in {
+.section-panel.from-back {
+  animation: section-in-back var(--dur-slow) var(--ease-out);
+}
+
+@keyframes section-in-fwd {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes section-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
   }
   to {
     opacity: 1;

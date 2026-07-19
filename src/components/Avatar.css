@@ -17,6 +17,34 @@
   padding: 2.5px;
 }
 
+button.avatar-wrap {
+  border: none;
+  font: inherit;
+  display: block;
+}
+
+.avatar-clickable {
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.avatar-clickable:hover {
+  transform: scale(1.04);
+}
+
+.avatar-clickable:active {
+  transform: scale(0.97);
+}
+
+.avatar-plain {
+  width: var(--size);
+  height: var(--size);
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #efefef;
+}
+
 .avatar-inner {
   width: 100%;
   height: 100%;

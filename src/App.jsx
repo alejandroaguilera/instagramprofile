@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import ProfileForm from './components/ProfileForm'
+import PhotoCropModal from './components/PhotoCropModal'
 import SectionView from './components/SectionView'
 import SideNav from './components/SideNav'
 import TabBar from './components/TabBar'
@@ -18,19 +19,65 @@ const DEFAULT_PROFILE = {
   verified: false,
 }
 
+// Orden visual de los tabs (el del TabBar móvil) para decidir la dirección del slide
+const NAV_ORDER = ['perfil', 'historias', 'editar', 'feed', 'interacciones']
+
 export default function App() {
   const [profile, setProfile] = useState(DEFAULT_PROFILE)
   const [activeSection, setActiveSection] = useState('perfil')
+  const [direction, setDirection] = useState('fwd')
+  const [cropSrc, setCropSrc] = useState(null)
+  const fileInputRef = useRef(null)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   const handleChange = useCallback((key, value) => {
     setProfile(prev => ({ ...prev, [key]: value }))
   }, [])
 
+  const selectSection = (id) => {
+    if (id === activeSection) return
+    setDirection(NAV_ORDER.indexOf(id) >= NAV_ORDER.indexOf(activeSection) ? 'fwd' : 'back')
+    setActiveSection(id)
+  }
+
   // En desktop el formulario siempre está visible: el tab "editar" solo existe en móvil
   useEffect(() => {
     if (isDesktop && activeSection === 'editar') setActiveSection('perfil')
   }, [isDesktop, activeSection])
+
+  // Flujo de subida/crop compartido: formulario (ambas instancias) y avatar del mockup de perfil
+  const openFilePicker = () => fileInputRef.current?.click()
+
+  const openCropper = (file) => {
+    const url = URL.createObjectURL(file)
+    handleChange('originalPhotoUrl', url)
+    setCropSrc(url)
+  }
+
+  const handleFileSelected = (e) => {
+    const file = e.target.files[0]
+    if (file) openCropper(file)
+    e.target.value = ''
+  }
+
+  const handleReadjust = () => {
+    if (profile.originalPhotoUrl) setCropSrc(profile.originalPhotoUrl)
+  }
+
+  const handleCropConfirm = (croppedUrl) => {
+    handleChange('photoUrl', croppedUrl)
+    setCropSrc(null)
+  }
+
+  const handleCropCancel = () => setCropSrc(null)
+
+  const formProps = {
+    profile,
+    onChange: handleChange,
+    onPickFile: openFilePicker,
+    onDropFile: openCropper,
+    onReadjust: handleReadjust,
+  }
 
   return (
     <div className="app">
@@ -50,23 +97,44 @@ export default function App() {
 
       <main className="app-main">
         <div className="layout">
-          <SideNav activeSection={activeSection} onSelect={setActiveSection} />
+          <SideNav activeSection={activeSection} onSelect={selectSection} />
           <aside className="sidebar">
-            <ProfileForm profile={profile} onChange={handleChange} />
+            <ProfileForm {...formProps} />
           </aside>
           <div className="content">
             {activeSection === 'editar' ? (
-              <div className="section-panel mobile-form" key="editar">
-                <ProfileForm profile={profile} onChange={handleChange} />
+              <div className={`section-panel from-${direction} mobile-form`} key="editar">
+                <ProfileForm {...formProps} />
               </div>
             ) : (
-              <SectionView section={activeSection} profile={profile} />
+              <SectionView
+                section={activeSection}
+                profile={profile}
+                direction={direction}
+                onAvatarClick={openFilePicker}
+              />
             )}
           </div>
         </div>
       </main>
 
-      <TabBar activeSection={activeSection} onSelect={setActiveSection} />
+      <TabBar activeSection={activeSection} onSelect={selectSection} />
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleFileSelected}
+        style={{ display: 'none' }}
+      />
+
+      {cropSrc && (
+        <PhotoCropModal
+          imageSrc={cropSrc}
+          onConfirm={handleCropConfirm}
+          onCancel={handleCropCancel}
+        />
+      )}
     </div>
   )
 }

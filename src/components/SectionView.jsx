@@ -8,12 +8,12 @@ import MockupSearch from './mockups/MockupSearch'
 import MockupComment from './mockups/MockupComment'
 import './SectionView.css'
 
-function renderSection(section, profile) {
+function renderSection(section, profile, onAvatarClick) {
   switch (section) {
     case 'perfil':
       return (
         <div className="section-grid single">
-          <MockupProfile profile={profile} />
+          <MockupProfile profile={profile} onAvatarClick={onAvatarClick} />
         </div>
       )
     case 'historias':
@@ -43,10 +43,10 @@ function renderSection(section, profile) {
   }
 }
 
-export default function SectionView({ section, profile }) {
+export default function SectionView({ section, profile, direction, onAvatarClick }) {
   return (
-    <div className="section-panel" key={section}>
-      {renderSection(section, profile)}
+    <div className={`section-panel from-${direction}`} key={section}>
+      {renderSection(section, profile, onAvatarClick)}
     </div>
   )
 }

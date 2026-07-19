@@ -14,7 +14,7 @@ const PLACEHOLDER_POSTS = [
   { gradient: 'linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)' },
 ]
 
-export default function MockupProfile({ profile }) {
+export default function MockupProfile({ profile, onAvatarClick }) {
   const bioLines = profile.bio.split('\n')
 
   return (
@@ -40,7 +40,14 @@ export default function MockupProfile({ profile }) {
       {/* Profile header */}
       <div className="profile-header">
         <div className="profile-avatar-area">
-          <Avatar photoUrl={profile.photoUrl} username={profile.username} size={80} hasStory />
+          <Avatar
+            photoUrl={profile.photoUrl}
+            username={profile.username}
+            size={80}
+            hasStory
+            onClick={onAvatarClick}
+            ariaLabel="Cambiar foto de perfil"
+          />
         </div>
         <div className="profile-stats">
           <div className="profile-stat">

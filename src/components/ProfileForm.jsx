@@ -1,42 +1,11 @@
-import { useRef, useState } from 'react'
-import PhotoCropModal from './PhotoCropModal'
 import './ProfileForm.css'
 
-export default function ProfileForm({ profile, onChange }) {
-  const fileInputRef = useRef(null)
-  const [cropSrc, setCropSrc] = useState(null)
-
-  const openCropper = (file) => {
-    const url = URL.createObjectURL(file)
-    onChange('originalPhotoUrl', url)
-    setCropSrc(url)
-  }
-
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-    openCropper(file)
-    e.target.value = ''
-  }
-
+export default function ProfileForm({ profile, onChange, onPickFile, onDropFile, onReadjust }) {
   const handleDrop = (e) => {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
     if (!file || !file.type.startsWith('image/')) return
-    openCropper(file)
-  }
-
-  const handleReadjust = () => {
-    if (profile.originalPhotoUrl) setCropSrc(profile.originalPhotoUrl)
-  }
-
-  const handleCropConfirm = (croppedUrl) => {
-    onChange('photoUrl', croppedUrl)
-    setCropSrc(null)
-  }
-
-  const handleCropCancel = () => {
-    setCropSrc(null)
+    onDropFile(file)
   }
 
   const formatNumber = (val) => {
@@ -62,21 +31,21 @@ export default function ProfileForm({ profile, onChange }) {
               <button
                 type="button"
                 className="photo-preview-wrap"
-                onClick={() => fileInputRef.current.click()}
+                onClick={onPickFile}
                 title="Cambiar foto"
               >
                 <img src={profile.photoUrl} alt="Foto de perfil" className="photo-preview-img" />
                 <span className="photo-overlay">Cambiar</span>
               </button>
               <div className="photo-actions">
-                <button type="button" className="photo-action" onClick={handleReadjust}>
+                <button type="button" className="photo-action" onClick={onReadjust}>
                   Reajustar encuadre
                 </button>
                 <span className="photo-hint">Haz clic en la foto para cambiarla</span>
               </div>
             </>
           ) : (
-            <div className="photo-placeholder" onClick={() => fileInputRef.current.click()}>
+            <div className="photo-placeholder" onClick={onPickFile}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
@@ -86,13 +55,6 @@ export default function ProfileForm({ profile, onChange }) {
             </div>
           )}
         </div>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handlePhotoChange}
-          style={{ display: 'none' }}
-        />
       </div>
 
       {/* Username */}
@@ -201,14 +163,6 @@ export default function ProfileForm({ profile, onChange }) {
         </svg>
         Tus datos no se envían a ningún servidor. Todo se procesa localmente en tu navegador.
       </div>
-
-      {cropSrc && (
-        <PhotoCropModal
-          imageSrc={cropSrc}
-          onConfirm={handleCropConfirm}
-          onCancel={handleCropCancel}
-        />
-      )}
     </div>
   )
 }
